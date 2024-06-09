@@ -17,7 +17,7 @@ export function LoginForm({ register, errors, isDirty, isValid, isSubmitting, on
   const isSubmitButtonDisabled = !isDirty || !isValid || isSubmitting;
 
   return (
-    <VStack as="form" onSubmit={onSubmit} gap={5} w="100%">
+    <VStack as="form" onSubmit={onSubmit} gap={5} w="100%" role="form">
       <FormInput
         {...register('email')}
         id="email"
