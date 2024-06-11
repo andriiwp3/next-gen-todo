@@ -1,5 +1,5 @@
-import { ArrowUpIcon, ArrowDownIcon, MinusIcon } from '@chakra-ui/icons';
-import { Card, CardBody, Center, Heading, Stack, Text } from '@chakra-ui/react';
+import { ArrowUpIcon, ArrowDownIcon, MinusIcon, DeleteIcon } from '@chakra-ui/icons';
+import { Card, CardBody, CardFooter, Center, Heading, Stack, Text } from '@chakra-ui/react';
 import { TODO_PRIORITY, TodoItem } from '@/app/todos/types';
 
 const PRIORITY_ICONS = Object.freeze({
@@ -8,9 +8,23 @@ const PRIORITY_ICONS = Object.freeze({
   [TODO_PRIORITY.HIGH]: ArrowUpIcon,
 });
 
-export interface TodoCardProps extends Omit<TodoItem, 'id'> {}
+interface TodoCardBaseProps extends Omit<TodoItem, 'id'> {
+  showToolbar?: boolean;
+}
 
-export function TodoCard({ title, description = '', priority }: TodoCardProps) {
+interface TodoCardWithToolbar extends TodoCardBaseProps {
+  showToolbar: true;
+  removeCard: () => void;
+}
+
+interface TodoCardWithoutToolbar extends TodoCardBaseProps {
+  showToolbar?: false;
+  removeCard?: never;
+}
+
+export type TodoCardProps = TodoCardWithToolbar | TodoCardWithoutToolbar;
+
+export function TodoCard({ title, description = '', priority, showToolbar = false, removeCard }: TodoCardProps) {
   const PriorityIcon = PRIORITY_ICONS[priority || TODO_PRIORITY.MEDIUM];
 
   return (
@@ -24,6 +38,11 @@ export function TodoCard({ title, description = '', priority }: TodoCardProps) {
           <Text color="whiteAlpha.500">{description}</Text>
         </Stack>
       </CardBody>
+      {showToolbar && (
+        <CardFooter justifyContent="flex-end">
+          <DeleteIcon cursor="pointer" onClick={removeCard} />
+        </CardFooter>
+      )}
     </Card>
   );
 }

@@ -2,6 +2,7 @@
 
 import { Box } from '@chakra-ui/react';
 import Cookies from 'js-cookie';
+import React from 'react';
 
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
