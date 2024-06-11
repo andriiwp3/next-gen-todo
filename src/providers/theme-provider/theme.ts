@@ -10,7 +10,7 @@ const config: Theme['config'] = {
 const styles: Theme['styles'] = {
   global: {
     body: {
-      bg: 'black',
+      bg: 'gray.900',
       color: 'gray.200',
     },
   },

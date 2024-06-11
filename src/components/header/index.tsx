@@ -22,7 +22,7 @@ export function Header({ user, logout }: HeaderProps) {
   };
 
   return (
-    <Flex as="header" p={4} shadow="md" bg="brand.500" color="white">
+    <Flex as="header" p={4} shadow="md" bg="brand.500" color="white" boxShadow="none">
       <Logo />
       <Spacer />
       <Flex align="center" gap={4}>
